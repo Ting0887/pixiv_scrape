@@ -42,8 +42,11 @@ def parse_Img(imglink):
     
     # two cases
     try:
-        img = soup.find("div",class_="sc-1e1hy3c-2 dSqYyx gtm-medium-work-expanded-view").find("a")["href"]
-        save_pic(img)
+        firstimg = soup.find("div",class_="sc-1e1hy3c-2 dSqYyx gtm-medium-work-expanded-view").find("a")["href"]
+        lastimg = soup.find("div",class_="sc-1e1hy3c-2 dSqYyx gtm-illust-work-scroll-finish-reading").find("a")["href"]
+        save_pic(firstimg)
+        save_pic(lastimg)
+        
         divs = soup.find_all("div",class_="sc-1e1hy3c-2 dSqYyx")
         for div in divs:
             img = div.find("div",class_="sc-1qpw8k9-0 eXiEBZ").find("a")["href"]
@@ -60,8 +63,7 @@ def parse_Img(imglink):
         save_pic(img)
     except:
         pass
-    
-    # if 1 image at this URL
+
     try:
         img = soup.find("div",class_="sc-1qpw8k9-0 gTFqQV").find("a")["href"]
         print(img)
@@ -95,7 +97,7 @@ def save_pic(img):
             picFile.write(diskStorage)
         picFile.close()
     except:
-        pass
+        print("下載失敗")
         
 
 if __name__ == '__main__':
